@@ -23,6 +23,13 @@ class UserSerializer(serializers.ModelSerializer):
             'phone': {'required': True}
         }
 
+    def create(self, validated_data):
+        """
+        Create and return a new User instance, given the validated data.
+        """ 
+        user = User.objects.create_user(**validated_data)
+        return user
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):

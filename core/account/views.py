@@ -10,7 +10,7 @@ from .serializers import (UserSerializer,
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
