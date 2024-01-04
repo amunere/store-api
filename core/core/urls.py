@@ -16,8 +16,8 @@ urlpatterns = [
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui'),
     path('openapi/', get_schema_view(
-        title="Pass",
-        description="Pass application API",
+        title="Store API",
+        description="Srore application API",
         version="0.1",
     ), name='openapi-schema'),
 ]

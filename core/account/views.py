@@ -7,16 +7,13 @@ from .serializers import (UserSerializer,
                           RegisterSerializer)
 
 
-from django.contrib.auth import get_user_model
-from django.contrib.auth.backends import ModelBackend
-
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 class RegisterView(generics.CreateAPIView):
     """
