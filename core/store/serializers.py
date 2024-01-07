@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, Product_image, Discount
+from .models import Category, Product, Image, Discount
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
     Product image serializer
     """
     class Meta:
-        model = Product_image
+        model = Image
         fields = '__all__'
 
 
@@ -51,7 +51,7 @@ class ProductSerializer(serializers.ModelSerializer):
         
         # save product images
         for image in uploaded_images:
-            Product_image.objects.create(product=product, image=image, thumbnail=image)
+            Image.objects.create(product=product, image=image, thumbnail=image)
 
         return product
 

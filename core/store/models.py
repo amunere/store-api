@@ -2,8 +2,6 @@ import PIL
 from django.db import models
 from pytils.translit import slugify
 from django.conf import settings
-from django.urls import reverse
-from decimal import Decimal
 from account.models import User
 from django.core.validators import RegexValidator
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -75,7 +73,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    
+
 class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
