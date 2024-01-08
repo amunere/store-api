@@ -43,7 +43,7 @@ class Product(models.Model):
     SKU = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, verbose_name = 'Category', related_name = 'categories_products')
     quantity = models.PositiveIntegerField(null=True, blank=True)
-    price = models.PositiveIntegerField(verbose_name='Price', default=0) 
+    price = models.PositiveIntegerField(verbose_name='Price') 
     discount = models.ForeignKey('Discount', on_delete=models.CASCADE, null=True, blank=True)
     discount_price = models.PositiveIntegerField(verbose_name='Discount price', null=True, blank=True)
     height = models.CharField(max_length=100, null=True, blank=True)
@@ -66,7 +66,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        if self.discount:
+        if self.discount and self.discount.active:
             self.discount_price = self.price-round(self.price*(self.discount.discount_percent/100))
         super(Product, self).save(*args, **kwargs)
 
@@ -100,7 +100,7 @@ class Image(models.Model):
 class Discount(models.Model):
     name = models.CharField(max_length=55)
     desc = models.TextField(max_length=100)
-    discount_percent = models.PositiveIntegerField(default=0, validators=PERCENTAGE_VALIDATOR, verbose_name='Discount price')
+    discount_percent = models.PositiveIntegerField(validators=PERCENTAGE_VALIDATOR, verbose_name='Discount price')
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
